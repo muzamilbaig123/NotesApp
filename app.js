@@ -12,8 +12,8 @@ function displayArea() {
 }
 function save() {
     let recTxt = textArea.value;
-    let localStore = localStorage.setItem(`sr-`, recTxt);
     allDataStore.push(recTxt);
+    localStorage.setItem(`mydata`, JSON.stringify(allDataStore));
     read();
     textArea.value = "";
 }
@@ -25,3 +25,10 @@ function read() {
         `;
     }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    let storePrintData = localStorage.getItem("mydata");
+    if (storePrintData) {
+        allDataStore = JSON.parse(storePrintData);
+        read();
+    }
+});

@@ -9,14 +9,14 @@ function create () {
 }
 
 function displayArea () {
-    writingArea.style.display = "block"    
+    writingArea.style.display = "block";    
     
 }
 
 function save () {
-    let recTxt = textArea.value;
-    let localStore = localStorage.setItem(`sr-`, recTxt)
-    allDataStore.push(recTxt);
+    let recTxt:string = textArea.value;
+    allDataStore.push(recTxt)   
+    localStorage.setItem(`mydata`, JSON.stringify(allDataStore))
     read()
     textArea.value = "";
 }
@@ -29,3 +29,10 @@ function read () {
     }
 }
 
+document.addEventListener('DOMContentLoaded', ()=>{
+    let storePrintData = localStorage.getItem("mydata");
+    if(storePrintData){
+        allDataStore = JSON.parse(storePrintData)
+        read()
+    }
+})
